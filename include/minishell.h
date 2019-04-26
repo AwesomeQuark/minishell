@@ -1,27 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/26 15:28:05 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/26 15:36:45 by conoel           ###   ########.fr       */
+/*   Created: 2019/04/26 15:28:18 by conoel            #+#    #+#             */
+/*   Updated: 2019/04/26 15:28:57 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef MINISHELL_H
+# define MINISHELL_H
 
-int		main(int argc, char **argv)
-{
-	t_token *instruction;
+#include "lexer.h"
 
-	if (argc != 2)
-		return (0);
-	instruction = lexer(argv[1]);
-	while (instruction->next)
-	{
-		ft_printf("<%s [%d]> ", instruction->next->content, instruction->next->type);
-		instruction = instruction->next;
-	}
-}
+#endif

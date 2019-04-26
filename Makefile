@@ -14,6 +14,8 @@ NAME =			minishell
 AUTEUR =		"mbonati\nconoel"
 
 SRC_NAME =		main.c\
+				lexer.c\
+				token_utils.c\
 
 SRC_DIR =		./src/
 SRC =			${addprefix $(SRC_DIR), $(SRC_NAME)}
@@ -23,7 +25,8 @@ OBJ_DIR =		./obj/
 OBJ =			${addprefix $(OBJ_DIR), $(OBJ_NAME)}
 
 HEADER_DIR =	./include/
-HEADER_NAME =	minishell.h
+HEADER_NAME =	minishell.h\
+				lexer.h
 HEADER =		${addprefix $(HEADER_DIR), $(HEADER_NAME)}
 
 LIB_NAME =		haflib.a
