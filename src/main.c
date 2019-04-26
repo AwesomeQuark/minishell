@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 15:28:05 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/26 22:33:46 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/26 22:57:45 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ int		main(void)
 	char	*line;
 	t_token *command;
 
-	signal(SIGINT, sigint_catch);
+	if (!(signal(SIGINT, sigint_catch)))
+		ft_printf("Cannot handle signals : %m\n");
 	while (1)
 	{
 		ft_printf("\n|- |%s%s%s| <> <%s%s%s>\n \\-> ", GREEN, get_user(), DEF, LIGHT_GREEN, get_path(), DEF);
