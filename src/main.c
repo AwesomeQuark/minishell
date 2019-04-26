@@ -6,33 +6,41 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 15:28:05 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/26 20:11:18 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/26 22:33:46 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	print_tokens(t_token *instruction)
+static void	unknown_command(t_token *command)
 {
-	while (instruction->next)
-	{
-		ft_printf("<%s [%d]> ", instruction->next->content, instruction->next->type);
-		instruction = instruction->next;
-	}
+	ft_printf("minishell: Unknown command %s\n", command->content);
 }
+
+/*static void	print_tokens(t_token *command)
+{
+	while (command->next)
+	{
+		ft_printf("<%s [%d]> ", command->next->content, command->next->type);
+		command = command->next;
+	}
+}*/
 
 int		main(void)
 {
 	char	*line;
-	t_token *instruction;
+	t_token *command;
 
+	signal(SIGINT, sigint_catch);
 	while (1)
 	{
-		ft_printf("\n$> ");
+		ft_printf("\n|- |%s%s%s| <> <%s%s%s>\n \\-> ", GREEN, get_user(), DEF, LIGHT_GREEN, get_path(), DEF);
 		line = get_the_file(0);
-		instruction = lexer(line);
-		print_tokens(instruction);
-		release_tokens(instruction);
+		command = lexer(line);
+		//print_tokens(command);
+		if (!(exec_command(command->next)))
+			unknown_command(command->next);
+		release_tokens(command);
 	}
 	return (0);
 }

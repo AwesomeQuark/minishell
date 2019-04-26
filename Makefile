@@ -16,6 +16,11 @@ AUTEUR =		"mbonati\nconoel"
 SRC_NAME =		main.c\
 				lexer.c\
 				token_utils.c\
+				exec_command.c\
+				builtin.c\
+				builtin2.c\
+				utils.c\
+				signal_catch.c
 
 SRC_DIR =		./src/
 SRC =			${addprefix $(SRC_DIR), $(SRC_NAME)}

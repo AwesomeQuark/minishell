@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 17:14:29 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/26 15:48:06 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/26 22:40:20 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,14 @@ typedef enum
 {
 	START,			// HEAD TAG
 	SEMILICON,		// EOL
-	PWD,			// BUILTINS
+	PWD,			// ### BUILTINS ###
 	CD,
+	ECHO,
+	ENV,
+	SETENV,
+	UNSETENV,
+	EXIT,
+	CLEAR,
 	STRING, 		//MISC
 	STOP			// End of the array
 } t_token_type;
