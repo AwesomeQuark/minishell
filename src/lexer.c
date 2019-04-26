@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 15:52:03 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/26 15:37:29 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/26 20:15:53 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int					lexer_main_loop(char *file, t_token *head)
 	{
 		if (handle_escape(&file))
 		{
-			if (last_token_found != file && head->next != NULL)
+			if (last_token_found != file)
 				add_token(last_token_found, file - last_token_found, STRING,
 					head);
 			file++;
@@ -70,7 +70,7 @@ int					lexer_main_loop(char *file, t_token *head)
 		if (!(add_token(current->content, current->size, current->type, head)))
 			return (0);
 	}
-	if (last_token_found != file && head->next != NULL)
+	if (last_token_found != file)
 		add_token(last_token_found, file - last_token_found, STRING, head);
 	return (1);
 }
@@ -79,7 +79,7 @@ t_token				*lexer(char *line)
 {
 	t_token	*head;
 
-	if (!(head = malloc_garbage(sizeof(t_token))))
+	if (!(head = malloc(sizeof(t_token))))
 		return (NULL);
 	head->type = START;
 	head->next = NULL;

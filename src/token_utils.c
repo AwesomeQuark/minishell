@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 15:28:10 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/26 15:38:04 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/26 20:08:39 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,18 @@ int				add_token(char *content, size_t size, t_token_type type, t_token *head)
 		return (0);
 	last->next = new;
 	return (1);
+}
+
+void			release_tokens(t_token *head)
+{
+	t_token *tmp;
+
+	while (head)
+	{
+		if (head->content)
+			free(head->content);
+		tmp = head;
+		head = head->next;
+		free(tmp);
+	}
 }
