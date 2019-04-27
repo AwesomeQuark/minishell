@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 15:52:03 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/27 12:55:45 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/28 00:14:27 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,14 @@ static int			handle_escape(char **file, char **last_token_found)
 		*last_token_found += 1;
 		*file += 1;
 		while (**file != '"')
+			*file += 1;
+		return (1);
+	}
+	if (**file == '\'')
+	{
+		*last_token_found += 1;
+		*file += 1;
+		while (**file != '\'')
 			*file += 1;
 		return (1);
 	}
