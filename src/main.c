@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 15:28:05 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/27 12:30:12 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/27 12:41:27 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,11 @@
 static void	unknown_command(t_token *command)
 {
 	ft_printf("minishell: Unknown command %s\n", command->content);
+}
+
+static void	print_prompt(void)
+{
+	ft_printf("\n|- |%s%s%s| <> <%s%s%s>\n \\-> ", GREEN, get_env("USER="), DEF, LIGHT_GREEN, get_env("PWD="), DEF);
 }
 
 /*static void	print_tokens(t_token *command)
@@ -31,7 +36,7 @@ int		main(void)
 	char	*line;
 	t_token *command;
 
-	if (!(signal(SIGINT, sigint_catch)))
+	if (signal(SIGINT, sigint_catch) == SIG_ERR)
 		ft_printf("Cannot handle signals : %m\n");
 	while (1)
 	{
