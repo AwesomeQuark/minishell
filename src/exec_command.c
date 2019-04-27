@@ -73,7 +73,7 @@ static int			search_exe(t_token *command)
 	i = 0;
 	path = get_env("PATH=");
 	paths = ft_strsplit(path, ':');
-	while (paths[i])
+	while (paths && paths[i])
 	{
 		if (search_exe_in_dir(command, paths[i], command->content))
 		{
