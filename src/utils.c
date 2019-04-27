@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 22:16:46 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/27 23:17:58 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/27 23:23:06 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char	**allocate_args(t_token *command)
 
 	i = 0;
 	ptr = command;
-	while (command)
+	while (command && command->type != SEMILICON)
 	{
 		i++;
 		command = command->next;
@@ -54,7 +54,7 @@ char	**allocate_args(t_token *command)
 	argv[i] = 0;
 	command = ptr;
 	i = 0;
-	while (command)
+	while (command && command->type != SEMILICON)
 	{
 		argv[i] = command->content;
 		command = command->next;
