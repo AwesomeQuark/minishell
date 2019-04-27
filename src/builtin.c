@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 21:38:28 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/26 22:35:06 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/27 12:36:58 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int		echo_handler(t_token *command)
 
 int		exit_handler(t_token *command)
 {
-	command = (t_token *)command;
+	release_tokens(command);
 	exit(1);
 }
 
@@ -49,8 +49,12 @@ int		pwd_handler(t_token *command)
 	char *path;
 	command = (t_token *)command;
 
-	if (!(path = get_path()))
+	if (command && command->type != SEMILICON)
+	{
+		ft_printf("pwd: too many arguments\n");
 		return (0);
+	}
+	path = get_env("PWD=");
 	ft_printf("%s\n", path);
 	return (1);
 }
@@ -61,9 +65,21 @@ int		cd_handler(t_token *command)
 	size_t	i;
 
 	i = 0;
-	path = ft_strcat(get_path(), "/");
-	path = ft_strcat(path, command->content);
-	if (!(chdir(path)))
+	if (command && command->next && (command->next->type != SEMILICON))
+	{
+		ft_printf("cd: too many arguments\n");
+		return (0);
+	}
+	if (!command || command->type == SEMILICON)
+		path = get_env("HOME=");
+	else if (command->content[0] == '/')
+		path = command->content;
+	else
+	{
+		path = ft_strcat(get_env("PWD="), "/");
+		path = ft_strcat(path, command->content);
+	}
+	if (chdir(path) == -1)
 	{
 		ft_printf("%m\n");
 		return (0);

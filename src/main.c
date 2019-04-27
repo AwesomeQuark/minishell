@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 15:28:05 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/26 22:57:45 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/27 12:30:12 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int		main(void)
 		ft_printf("Cannot handle signals : %m\n");
 	while (1)
 	{
-		ft_printf("\n|- |%s%s%s| <> <%s%s%s>\n \\-> ", GREEN, get_user(), DEF, LIGHT_GREEN, get_path(), DEF);
+		print_prompt();
 		line = get_the_file(0);
 		command = lexer(line);
 		//print_tokens(command);

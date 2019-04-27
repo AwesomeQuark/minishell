@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 21:26:51 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/26 22:49:53 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/26 22:54:37 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int		exec_command(t_token *command)
 	int		i;
 
 	i = 0;
+	if (!command)
+		return (1);
 	if (command->type == STRING)
 	{
 		//if (Check_path_fonction(command)))  A CODER MDR
