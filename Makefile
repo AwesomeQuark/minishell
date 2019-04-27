@@ -74,6 +74,7 @@ fclean:
 $(NAME): ./auteur $(OBJ_DIR) $(OBJ) $(HEADER)
 	$(CC) $(FLAGS) $(OBJ) $(LIB) -o $(NAME) -I$(HEADER_DIR) -I$(LIB_DIR) `sdl2-config --cflags --libs`
 	echo "\n \033[1m\033[4m\033[35m\\^/ Done compiling \\^/\033[0m [$(NAME)] --> $(LIB_NAME)"
+	clear
 	echo "#########################################################################"
 	echo "##\033[32m  ___  ___   __   __  __   __    ___   __   __   ____   __     __    \033[0m##"
 	echo "##\033[32m |   \/   | |  | |  \|  | |  | /  __| |  |_|  | | ___\ |  |   |  |   \033[0m##"
