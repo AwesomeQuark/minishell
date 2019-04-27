@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 15:28:05 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/27 13:19:27 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/27 22:12:32 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,26 @@ static void	unknown_command(t_token *command)
 
 static void	print_prompt(void)
 {
-	ft_printf("%s%s%s%s %s[%s]%s > ", BOLD, CYAN, get_env("USER="), DEF, BLUE, get_env("PWD="), DEF);
+	char *path;
+	char *home;
+	char *display;
+
+	path = ft_strdup(get_env("PWD="));
+	home = get_env("HOME=");
+	if (ft_strncmp(path, home, ft_strlen(home)) == 0)
+	{
+		path[ft_strlen(home) - 1] = '~';
+		display = &path[ft_strlen(home) - 1];
+	}
+	else
+		display = path;
+	ft_printf("%s%s%s%s %s[%s]%s > ", BOLD, CYAN, get_env("USER="), DEF, BLUE, display, DEF);
+	free(path);
 }
 
 static void	sigint_catch(int signo)
 {
-	ft_printf("\n\033[31m[%d]Closing minishell..\n", signo);
+	ft_printf("\n%s[%d]Closing minishell..%s\n", RED, signo, DEF);
 	exit(1);
 }
 

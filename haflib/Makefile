@@ -29,7 +29,7 @@ SRCNAME = 			ft_bzero.c ft_memcpy.c ft_memccpy.c ft_iscntrl.c ft_isgraph.c \
 					ft_putendl.c ft_putnbr.c ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c \
 					ft_putnbr_fd.c ft_isspace.c ft_isblank.c ft_memset.c quit.c ft_memdup.c\
 					ft_strtoll.c get_the_file.c print_char_str.c free_tab.c print_int_str.c\
-					garbage.c\
+					garbage.c concat.c\
 					ft_printf.c get_args.c ft_size_flags.c additional_converters.c \
 					ft_ftoa.c ft_itoa_base_unsigned.c ft_itoa_base_signed.c ft_ptoa.c\
 					ft_bzero2.c ft_strcmp2.c ft_strlen2.c ft_strcat2.c ft_memset2.c ft_strdup2.c ft_atoi2.c

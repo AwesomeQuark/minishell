@@ -6,13 +6,14 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 15:28:18 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/27 13:00:05 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/27 23:16:52 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+#include <dirent.h>
 #include <sys/ioctl.h>
 #include "lexer.h"
 
@@ -43,5 +44,6 @@ int				clear_handler(t_token *command);
 */
 char			*get_env(char *var);
 t_token			*check_semilicon(t_token *command);
+char			**allocate_args(t_token *command);
 
 #endif

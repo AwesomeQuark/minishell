@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 21:26:51 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/27 13:05:09 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/27 23:19:31 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,68 @@ static t_builtin	g_builtins[] =
 	{STOP, NULL}
 };
 
-int		exec_command(t_token *command)
+static void			execute(t_token *command, char *exe_path)
+{
+	char	**argv;
+	pid_t	pid;
+	int		status;
+
+	argv = allocate_args(command);
+	if ((pid = fork()) == -1)
+		return ;
+	else if (pid == 0)
+	{
+		if (execve(exe_path, argv, environ) == -1)
+			ft_printf("%m\n");
+		exit(1);
+	}
+	wait(&status);
+	free(argv);
+}
+
+static int			search_exe_in_dir(t_token *command, char *dir_name, char *exe_name)
+{
+	DIR *d;
+	struct dirent *dir;
+
+	d = opendir(dir_name);
+	if (!d)
+		return (0);
+	while ((dir = readdir(d)) != NULL)
+	{
+		if (ft_strcmp(dir->d_name, exe_name) == 0)
+		{
+			execute(command, concat(dir_name, "/", exe_name));
+			return (1);
+		}
+	}
+	closedir(d);
+	return (0);
+}
+
+static int			search_exe(t_token *command)
+{
+	char	*path;
+	char	**paths;
+	size_t	i;
+
+	i = 0;
+	path = get_env("PATH=");
+	paths = ft_strsplit(path, ':');
+	while (paths[i])
+	{
+		if (search_exe_in_dir(command, paths[i], command->content))
+		{
+			free(paths);
+			return (1);
+		}
+		i++;
+	}
+	free(paths);
+	return (0);
+}
+
+int					exec_command(t_token *command)
 {
 	int		i;
 
@@ -34,8 +95,8 @@ int		exec_command(t_token *command)
 		return (1);
 	if (command->type == STRING)
 	{
-		//if (Check_path_fonction(command)))  A CODER MDR
-		//	return (1);
+		if (search_exe(command))
+			return (1);
 		return (0);
 	}
 	while (g_builtins[i].type != STOP)
