@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 15:28:18 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/26 22:47:49 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/27 12:40:30 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,7 @@ void			sigint_catch(int signo);
 /*
 **	UTILS
 */
-char			*get_path(void);
-char			*get_user(void);
+char			*get_env(char *var);
 t_token			*check_semilicon(t_token *command);
 
 #endif

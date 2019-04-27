@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 21:38:28 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/27 12:36:58 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/27 12:48:52 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,10 @@ int		echo_handler(t_token *command)
 {
 	while (command && command->type != SEMILICON)
 	{
-		if (command->next && command->next->type != SEMILICON)
-			ft_printf("%s ", command->content);
-		else
-			ft_printf("%s\n", command->content);
+		ft_printf("%s ", command->content);
 		command = command->next;
 	}
+	write(1, "\n", 1);
 	return (1);
 }
 

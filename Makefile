@@ -54,7 +54,7 @@ CC =			clang
 ########## GENERALS ##########
 ##############################
 
-all: $(LIB) $(OBJ_DIR) $(NAME)
+all: $(LIB) $(OBJ_DIR) $(NAME) $(HEADER)
 
 re: fclean all
 

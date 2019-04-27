@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 22:16:46 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/27 12:21:57 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/27 12:40:20 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,4 @@ t_token	*check_semilicon(t_token *command)
 		command = command->next;
 	}
 	return (NULL);
-}
-
-void	print_prompt(void)
-{
-	ft_printf("\n|- |%s%s%s| <> <%s%s%s>\n \\-> ", GREEN, get_env("USER="), DEF, LIGHT_GREEN, get_env("PWD="), DEF);
 }

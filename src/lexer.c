@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 15:52:03 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/26 22:40:32 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/27 12:55:45 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,18 @@ static t_token_def	g_tokens[] =
 	{NULL, 0, STOP}
 };
 
-static int			handle_escape(char **file)
+static int			handle_escape(char **file, char **last_token_found)
 {
 	if (**file == ' ' || **file == '\t' || **file == '\n')
 		return (1);
+	if (**file == '"')
+	{
+		*last_token_found += 1;
+		*file += 1;
+		while (**file != '"')
+			*file += 1;
+		return (1);
+	}
 	return (0);
 }
 
@@ -55,7 +63,7 @@ int					lexer_main_loop(char *file, t_token *head)
 	last_token_found = file;
 	while (file && *file)
 	{
-		if (handle_escape(&file))
+		if (handle_escape(&file, &last_token_found))
 		{
 			if (last_token_found != file)
 				add_token(last_token_found, file - last_token_found, STRING,
