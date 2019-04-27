@@ -64,7 +64,7 @@ clean:
 
 fclean:
 	make fclean -C $(LIB_DIR)
-	rm -rf $(OBJ_DIR) $(NAME)
+	rm -rf $(OBJ_DIR) $(NAME) *.dSYM
 	echo "\033[31m\033[1m\033[4mCleaning\033[0m\033[31m : Everything\033[0m [$(NAME)]";
 
 ###############################
@@ -74,10 +74,19 @@ fclean:
 $(NAME): ./auteur $(OBJ_DIR) $(OBJ) $(HEADER)
 	$(CC) $(FLAGS) $(OBJ) $(LIB) -o $(NAME) -I$(HEADER_DIR) -I$(LIB_DIR) `sdl2-config --cflags --libs`
 	echo "\n \033[1m\033[4m\033[35m\\^/ Done compiling \\^/\033[0m [$(NAME)] --> $(LIB_NAME)"
+	echo "#########################################################################"
+	echo "##\033[32m  ___  ___   __   __  __   __    ___   __   __   ____   __     __    \033[0m##"
+	echo "##\033[32m |   \/   | |  | |  \|  | |  | /  __| |  |_|  | | ___\ |  |   |  |   \033[0m##"
+	echo "##\033[32m |  \__/  | |  | |      | |  | |__  | |   _   | | __|| |  |_  |  |_  \033[0m##"
+	echo "##\033[32m |__|__|__| |__| |__|\__| |__| |____/ |__|_|__| |____/ |____| |____| \033[0m##"
+	echo "##\033[32m |__|  |__| |__| |__|\__| |__| |____| |__| |__| |____| |____| |____| \033[0m##"
+	echo "##                                                                     ##"
+	echo "##################\033[32m MBONATI \033[0m####################\033[32m CONOEL \033[0m##################"
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c $(HEADER)
 	$(CC) $(FLAGS) -c $< -o $@ -I$(HEADER_DIR) -I$(LIB_HEADER) `sdl2-config --cflags`
 	printf "\033[32m\033[1m\033[4mCompiling\033[0m\033[32m : %-30s \033[0m [$(NAME)]\n" $@
+
 
 $(OBJ_DIR):
 	clear
