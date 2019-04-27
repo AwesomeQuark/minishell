@@ -71,6 +71,11 @@ static int			search_exe(t_token *command)
 	size_t	i;
 
 	i = 0;
+	if (command->content[0] == '/' || command->content[0] == '.' || command->content[0] == '~')
+	{
+		execute(command, command->content);
+		return (1);
+	}
 	path = get_env("PATH=");
 	paths = ft_strsplit(path, ':');
 	while (paths && paths[i])
