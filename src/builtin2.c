@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 22:35:52 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/26 22:42:42 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/27 12:59:36 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		clear_handler(t_token *command)
 {
-	struct winsize  w;
+	struct winsize	w;
 
 	command = (t_token *)command;
 	ioctl(0, TIOCGWINSZ, &w);

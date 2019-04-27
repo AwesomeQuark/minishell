@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 15:28:10 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/26 20:08:39 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/27 12:57:25 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ static t_token	*last_token(t_token *head)
 	return (head);
 }
 
-int				add_token(char *content, size_t size, t_token_type type, t_token *head)
+int				add_token(char *content, size_t size, t_token_type type,
+	t_token *head)
 {
 	t_token	*new;
 	t_token	*last;

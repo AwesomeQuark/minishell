@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 15:28:18 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/27 12:40:30 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/27 13:00:05 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ int				setenv_handler(t_token *command);
 int				unsetenv_handler(t_token *command);
 int				exit_handler(t_token *command);
 int				clear_handler(t_token *command);
-
-void			sigint_catch(int signo);
 
 /*
 **	UTILS

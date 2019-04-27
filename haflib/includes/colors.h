@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/19 16:05:11 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/25 16:54:00 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/27 13:18:34 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 # define COLORS_H
 
 # define DEF "\e[39m"
+# define BOLD "\033[1m"
+# define SHADED "\033[2M"
+
 # define BLACK "\e[30m"
 # define RED "\e[31m"
 # define GREEN "\e[32m"

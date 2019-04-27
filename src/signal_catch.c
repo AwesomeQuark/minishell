@@ -6,14 +6,8 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 22:25:41 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/27 12:20:11 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/27 13:00:46 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void		sigint_catch(int signo)
-{
-	ft_printf("\n\033[31m[%d]Closing minishell..\n", signo);
-	exit(1);
-}

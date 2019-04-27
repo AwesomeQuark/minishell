@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 21:38:28 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/27 12:48:52 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/27 13:02:11 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int		env_handler(t_token *command)
 
 	i = 0;
 	command = (t_token *)command;
-	while(environ[i])
+	while (environ[i])
 	{
 		printf("%s\n", environ[i++]);
 	}
@@ -45,7 +45,6 @@ int		env_handler(t_token *command)
 int		pwd_handler(t_token *command)
 {
 	char *path;
-	command = (t_token *)command;
 
 	if (command && command->type != SEMILICON)
 	{
@@ -59,7 +58,7 @@ int		pwd_handler(t_token *command)
 
 int		cd_handler(t_token *command)
 {
-	char *path;
+	char	*path;
 	size_t	i;
 
 	i = 0;
