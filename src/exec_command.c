@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 21:26:51 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/27 23:47:10 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/28 00:00:31 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,27 +89,30 @@ static int			search_exe(t_token *command)
 int					exec_command(t_token *command)
 {
 	int		i;
+	int		found;
 
 	i = 0;
+	found = 0;
 	if (!command)
 		return (1);
 	if (command->type == STRING)
 	{
 		if (search_exe(command))
-			return (1);
-		return (0);
+			found = 1;
 	}
-	while (g_builtins[i].type != STOP)
+	else while (g_builtins[i].type != STOP)
 	{
 		if (command->type == g_builtins[i].type)
 		{
 			if (!(g_builtins[i].function(command->next)))
 				ft_printf("Exec error...\n");
-			if (check_semilicon(command))
-				return (exec_command(check_semilicon(command)));
-			return (1);
+			found = 1;
 		}
 		i++;
 	}
-	return (0);
+	if (!found)
+		unknown_command(command);
+	if (check_semilicon(command))
+		return (exec_command(check_semilicon(command)));
+	return (1);
 }

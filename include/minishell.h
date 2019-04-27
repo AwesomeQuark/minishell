@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 15:28:18 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/27 23:16:52 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/27 23:56:47 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef struct	s_builtin
 int				exec_command(t_token *command);
 
 /*
-**	BUILTIN AND SIGNAL HANDLERS
+**	BUILTIN HANDLERS
 */
 int				pwd_handler(t_token *command);
 int				cd_handler(t_token *command);
@@ -45,5 +45,12 @@ int				clear_handler(t_token *command);
 char			*get_env(char *var);
 t_token			*check_semilicon(t_token *command);
 char			**allocate_args(t_token *command);
+
+/*
+**	DISPLAY
+*/
+void			unknown_command(t_token *command);
+void			print_prompt(void);
+void			sigint_catch(int signo);
 
 #endif

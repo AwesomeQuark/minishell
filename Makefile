@@ -20,7 +20,7 @@ SRC_NAME =		main.c\
 				builtin.c\
 				builtin2.c\
 				utils.c\
-				signal_catch.c
+				display.c
 
 SRC_DIR =		./src/
 SRC =			${addprefix $(SRC_DIR), $(SRC_NAME)}
