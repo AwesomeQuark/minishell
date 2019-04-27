@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 21:38:28 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/27 13:29:04 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/28 00:16:50 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,15 +59,16 @@ int		pwd_handler(t_token *command)
 int		cd_handler(t_token *command)
 {
 	char	*path;
+	char	*final_path;
 	size_t	i;
 
 	i = 0;
-	if (command && command->next && (command->next->type != SEMILICON))
+	if (command && command->type != SEMILICON && command->next && command->next->type != SEMILICON)
 	{
 		ft_printf("cd: too many arguments\n");
 		return (0);
 	}
-	if (!command || command->type == SEMILICON)
+	if (!command || command->type == SEMILICON || ft_strcmp(command->content, "~") == 0)
 		path = get_env("HOME=");
 	else if (command->content[0] == '/')
 		path = command->content;
@@ -81,5 +82,9 @@ int		cd_handler(t_token *command)
 		ft_printf("%m\n");
 		return (0);
 	}
+	if (!(final_path = getcwd(path, ft_strlen(path))))
+		setenv("PWD", path, 1);
+	else
+		setenv("PWD", final_path, 1);
 	return (1);
 }

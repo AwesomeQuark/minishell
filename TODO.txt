@@ -1,0 +1,4 @@
+Autocompletion
+Fix lexer with bin exe immediatly followed by a semilicon
+Handle $ and ~
+Fix CD wrong path (still modify the PWD env)

@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 21:26:51 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/28 00:00:31 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/28 00:16:03 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,7 @@ int					exec_command(t_token *command)
 	{
 		if (command->type == g_builtins[i].type)
 		{
-			if (!(g_builtins[i].function(command->next)))
-				ft_printf("Exec error...\n");
+			g_builtins[i].function(command->next);
 			found = 1;
 		}
 		i++;
