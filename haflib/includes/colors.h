@@ -6,14 +6,14 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/19 16:05:11 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/27 13:18:34 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/27 23:49:26 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef COLORS_H
 # define COLORS_H
 
-# define DEF "\e[39m"
+# define DEF "\033[0m"
 # define BOLD "\033[1m"
 # define SHADED "\033[2M"
 
