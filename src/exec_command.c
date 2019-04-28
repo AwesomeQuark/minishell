@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 21:26:51 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/28 00:16:03 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/28 15:14:39 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void			execute(t_token *command, char *exe_path)
 	pid = 0;
 	argv = allocate_args(command);
 	if ((pid = fork()) == -1)
-		return ;
+		return ; 
 	else if (pid == 0)
 	{
 		if (execve(exe_path, argv, environ) == -1)

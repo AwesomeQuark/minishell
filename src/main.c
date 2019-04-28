@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 15:28:05 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/28 00:36:11 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/28 17:26:48 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ int			main(void)
 		line = get_the_file(0);
 		command = lexer(line);
 		exec_command(command->next);
-		release_tokens(command);
+		//release_tokens(command);
+		command= NULL;
 	}
-	return (0);
+	return (1);
 }

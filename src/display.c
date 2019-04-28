@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/27 23:55:42 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/28 00:35:25 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/28 17:47:27 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	print_prompt(void)
 	}
 	else
 		display = path;
-	ft_printf("%s%s%s %s[%s] %s>%s ", BOLD, CYAN, get_env("USER="), BLUE, display, CYAN, DEF);
+	ft_printf("%s%s%s %s[%s] %s->%s ", BOLD, CYAN, get_env("USER="), BLUE, display, CYAN, DEF);
 	free(path);
 }
 

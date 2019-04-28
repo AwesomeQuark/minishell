@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 21:38:28 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/28 00:16:50 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/28 17:26:00 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,32 +59,29 @@ int		pwd_handler(t_token *command)
 int		cd_handler(t_token *command)
 {
 	char	*path;
-	char	*final_path;
-	size_t	i;
+	int		free_;
 
-	i = 0;
+	free_ = 1;
 	if (command && command->type != SEMILICON && command->next && command->next->type != SEMILICON)
 	{
 		ft_printf("cd: too many arguments\n");
 		return (0);
 	}
-	if (!command || command->type == SEMILICON || ft_strcmp(command->content, "~") == 0)
-		path = get_env("HOME=");
+	if (!command || command->type == SEMILICON)
+		path = ft_strdup(get_env("HOME="));
 	else if (command->content[0] == '/')
+	{
+		free_ = 0;
 		path = command->content;
-	else
-	{
-		path = ft_strcat(get_env("PWD="), "/");
-		path = ft_strcat(path, command->content);
 	}
-	if (chdir(path) == -1)
-	{
-		ft_printf("%m\n");
-		return (0);
-	}
-	if (!(final_path = getcwd(path, ft_strlen(path))))
-		setenv("PWD", path, 1);
 	else
-		setenv("PWD", final_path, 1);
+		path = concat(get_env("PWD="), "/", command->content);
+	if (access(path, F_OK) == 0)
+		chdir(path);
+	else
+		ft_printf("cd: no such file or directory: %s\n", command->content);
+	setenv("PWD", getcwd(NULL, 1024), 1);
+	if (free_)
+		free(path);
 	return (1);
 }

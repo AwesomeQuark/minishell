@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 15:28:10 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/27 12:57:25 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/28 16:25:36 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int				add_token(char *content, size_t size, t_token_type type,
 	t_token	*new;
 	t_token	*last;
 
-	if (!(new = malloc_garbage(sizeof(t_token))))
+	if (!(new = malloc(sizeof(t_token))))
 		return (0);
 	new->content = ft_memdup(content, size);
 	new->size = size;
