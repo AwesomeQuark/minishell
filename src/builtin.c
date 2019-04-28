@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 21:38:28 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/28 17:26:00 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/28 18:41:51 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,9 @@ int		pwd_handler(t_token *command)
 int		cd_handler(t_token *command)
 {
 	char	*path;
-	int		free_;
 
-	free_ = 1;
-	if (command && command->type != SEMILICON && command->next && command->next->type != SEMILICON)
+	if (command && command->type != SEMILICON && command->next
+		&& command->next->type != SEMILICON)
 	{
 		ft_printf("cd: too many arguments\n");
 		return (0);
@@ -70,10 +69,7 @@ int		cd_handler(t_token *command)
 	if (!command || command->type == SEMILICON)
 		path = ft_strdup(get_env("HOME="));
 	else if (command->content[0] == '/')
-	{
-		free_ = 0;
 		path = command->content;
-	}
 	else
 		path = concat(get_env("PWD="), "/", command->content);
 	if (access(path, F_OK) == 0)
@@ -81,7 +77,8 @@ int		cd_handler(t_token *command)
 	else
 		ft_printf("cd: no such file or directory: %s\n", command->content);
 	setenv("PWD", getcwd(NULL, 1024), 1);
-	if (free_)
-		free(path);
+	free(path);
+	if (path == command->content)
+		command->content = NULL;
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 22:35:52 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/28 16:28:28 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/28 18:39:27 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ int		setenv_handler(t_token *command)
 		ft_printf("Usage : setenv var [value]\n");
 		return (0);
 	}
-	if (command->next && command->next->next && command->next->next->type != SEMILICON)
+	if (command->next && command->next->next
+		&& command->next->next->type != SEMILICON)
 	{
 		ft_printf("setenv: too many arguments\n");
 		return (0);

@@ -20,7 +20,8 @@ SRC_NAME =		main.c\
 				builtin.c\
 				builtin2.c\
 				utils.c\
-				display.c
+				display.c\
+				replace_links.c
 
 SRC_DIR =		./src/
 SRC =			${addprefix $(SRC_DIR), $(SRC_NAME)}
@@ -39,7 +40,7 @@ LIB_DIR =		./haflib/
 LIB_HEADER =	./haflib/includes/
 LIB =			${addprefix $(LIB_DIR), $(LIB_NAME)}
 
-FLAGS =			-Wall -Werror -Wextra -O0 -g3 #-fsanitize=address
+FLAGS =			-Wall -Werror -Wextra -O0 -g3 -fsanitize=address
 CC =			clang
 
 #################################################################################

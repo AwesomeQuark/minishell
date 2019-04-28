@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 17:14:29 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/28 16:25:29 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/28 17:59:27 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,6 @@ typedef struct s_token
 t_token			*lexer(char *line);
 void			release_tokens(t_token *head);
 int				add_token(char *content, size_t size, t_token_type type, t_token *head);
+void			replace_links(t_token *head);
 
 #endif

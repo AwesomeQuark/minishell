@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 15:52:03 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/28 16:25:24 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/28 17:56:25 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,5 +108,6 @@ t_token				*lexer(char *line)
 	head->size = 0;
 	head->content = NULL;
 	lexer_main_loop(line, head);
+	replace_links(head);
 	return (head);
 }

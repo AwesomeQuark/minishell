@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strcat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: conoel <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/09 10:43:26 by conoel            #+#    #+#             */
-/*   Updated: 2018/11/11 16:42:28 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/28 18:11:40 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ char	*ft_strcat(char *s1, const char *s2)
 	char *save;
 
 	save = s1;
+	if (!s2)
+		return (s1);
 	while (*s1)
 		s1++;
 	while (*s2)
