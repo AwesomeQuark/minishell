@@ -72,7 +72,7 @@ fclean:
 ###############################
 
 $(NAME): ./auteur $(OBJ_DIR) $(OBJ) $(HEADER)
-	$(CC) $(FLAGS) $(OBJ) $(LIB) -o $(NAME) -I$(HEADER_DIR) -I$(LIB_DIR) `sdl2-config --cflags --libs`
+	$(CC) $(FLAGS) $(OBJ) $(LIB) -o $(NAME) -I$(HEADER_DIR) -I$(LIB_DIR)
 	echo "\n \033[1m\033[4m\033[35m\\^/ Done compiling \\^/\033[0m [$(NAME)] --> $(LIB_NAME)"
 	clear
 	echo "#########################################################################"
@@ -85,7 +85,7 @@ $(NAME): ./auteur $(OBJ_DIR) $(OBJ) $(HEADER)
 	echo "##################\033[32m MBONATI \033[0m####################\033[32m CONOEL \033[0m##################"
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c $(HEADER)
-	$(CC) $(FLAGS) -c $< -o $@ -I$(HEADER_DIR) -I$(LIB_HEADER) `sdl2-config --cflags`
+	$(CC) $(FLAGS) -c $< -o $@ -I$(HEADER_DIR) -I$(LIB_HEADER)
 	printf "\033[32m\033[1m\033[4mCompiling\033[0m\033[32m : %-30s \033[0m [$(NAME)]\n" $@
 
 

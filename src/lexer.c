@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 15:52:03 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/28 17:56:25 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/28 20:28:39 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,17 @@ static int			handle_escape(char **file, char **last_token_found)
 	{
 		*last_token_found += 1;
 		*file += 1;
-		while (**file != '"')
+		while (**file != '\0' && **file != '"')
 			*file += 1;
-		return (1);
+		return (2);
 	}
 	if (**file == '\'')
 	{
 		*last_token_found += 1;
 		*file += 1;
-		while (**file != '\'')
+		while (**file != '\0' && **file != '\'')
 			*file += 1;
-		return (1);
+		return (2);
 	}
 	return (0);
 }
@@ -67,14 +67,18 @@ int					lexer_main_loop(char *file, t_token *head)
 {
 	t_token_def	*current;
 	char		*last_token_found;
+	int			ret;
 
 	last_token_found = file;
 	while (file && *file)
 	{
-		if (handle_escape(&file, &last_token_found))
+		if ((ret = handle_escape(&file, &last_token_found)))
 		{
-			if (last_token_found != file)
+			if (last_token_found != file && ret == 1)
 				add_token(last_token_found, file - last_token_found, STRING,
+					head);
+			else if (last_token_found != file && ret == 2)
+				add_token(last_token_found, file - last_token_found, STRING_RAW,
 					head);
 			file++;
 			last_token_found = file;

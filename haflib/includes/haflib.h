@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 18:03:06 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/27 23:02:32 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/28 18:43:42 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ char				*get_the_file(int fd);
 
 void				print_int_str(int *tab, size_t len);
 void				print_char_str(char c, size_t nb);
+void				ft_putstr_fd(char const *s, int fd);
 
 void				*ft_bzero(void *s, size_t n);
 char				*ft_strdup(const char *s);

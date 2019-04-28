@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 22:16:46 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/28 16:38:49 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/28 21:30:49 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*get_env(char *var)
 	size_t	i;
 
 	i = 0;
-	while (environ[i])
+	while (environ && environ[i])
 	{
 		if (ft_strncmp(environ[i], var, ft_strlen(var)) == 0)
 			return (environ[i] + ft_strlen(var));

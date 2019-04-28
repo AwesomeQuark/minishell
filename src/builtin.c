@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 21:38:28 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/28 18:41:51 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/28 21:41:17 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,14 @@ int		pwd_handler(t_token *command)
 {
 	char *path;
 
+	path = NULL;
 	if (command && command->type != SEMILICON)
 	{
 		ft_printf("pwd: too many arguments\n");
 		return (0);
 	}
-	path = get_env("PWD=");
+	path = getcwd(path, 1024);
+	setenv("PWD", path, 1);
 	ft_printf("%s\n", path);
 	return (1);
 }
@@ -72,13 +74,15 @@ int		cd_handler(t_token *command)
 		path = command->content;
 	else
 		path = concat(get_env("PWD="), "/", command->content);
-	if (access(path, F_OK) == 0)
+	if (path && access(path, F_OK) == 0)
 		chdir(path);
-	else
+	else if (command)
 		ft_printf("cd: no such file or directory: %s\n", command->content);
+	else
+		ft_printf("cd: NULL directory (try setenv $HOME)\n");
 	setenv("PWD", getcwd(NULL, 1024), 1);
 	free(path);
-	if (path == command->content)
+	if (command && path == command->content)
 		command->content = NULL;
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/27 23:55:42 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/28 18:39:35 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/28 21:39:50 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,24 @@ void	print_prompt(void)
 {
 	char *path;
 	char *home;
+	char *user;
 	char *display;
 
 	path = ft_strdup(get_env("PWD="));
 	home = get_env("HOME=");
-	if (ft_strncmp(path, home, ft_strlen(home)) == 0)
+	user = get_env("USER=");
+	if (home && path && ft_strncmp(path, home, ft_strlen(home)) == 0)
 	{
 		path[ft_strlen(home) - 1] = '~';
 		display = &path[ft_strlen(home) - 1];
 	}
 	else
 		display = path;
-	ft_printf("%s%s%s %s[%s] %s->%s ", BOLD, CYAN, get_env("USER="), BLUE,
+	if (user == NULL)
+		user = ft_strdup("minishell");
+	if (display == NULL)
+		display = ft_strdup("ENV unavailable");
+	ft_printf("%s%s%s %s[%s] %s->%s ", BOLD, CYAN, user, BLUE,
 		display, CYAN, DEF);
 	free(path);
 }

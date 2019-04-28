@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 17:14:29 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/28 17:59:27 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/28 20:21:29 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef enum
 	EXIT,
 	CLEAR,
 	STRING, 		//MISC
+	STRING_RAW,
 	STOP			// End of the array
 } t_token_type;
 
