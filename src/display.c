@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/27 23:55:42 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/28 21:39:50 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/28 21:51:07 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ void	print_prompt(void)
 		user = ft_strdup("minishell");
 	if (display == NULL)
 		display = ft_strdup("ENV unavailable");
+	if (!get_env("PATH="))
+		ft_printf("\033[31m\033[1m /!\\ No PATH /!\\ ");
 	ft_printf("%s%s%s %s[%s] %s->%s ", BOLD, CYAN, user, BLUE,
 		display, CYAN, DEF);
 	free(path);
