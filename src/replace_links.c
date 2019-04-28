@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/28 17:59:02 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/28 18:56:50 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/28 22:52:48 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,9 @@ static void		replace_dollar(t_token *current, size_t *i)
 		*i += 1;
 		while (current->content[*i + var_size] && current->content[*i + var_size] != '$')
 			var_size++;
-		if (!(var = ft_memdup(&current->content[*i], var_size + 2)))
+		if (!(var = malloc(sizeof(char) * (var_size + 2))))
 			return ;
+		ft_strncpy(var, &current->content[*i], var_size);
 		var[var_size] = '=';
 		var[var_size + 1] = '\0';
 		new = concat(current->content, get_env(var), &current->content[*i + var_size]);

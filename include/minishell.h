@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 15:28:18 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/28 20:20:56 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/28 22:25:05 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 #include "lexer.h"
 
 extern char **environ;
+t_token *g_command;
+
 
 typedef struct	s_builtin
 {

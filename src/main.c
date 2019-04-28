@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 15:28:05 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/28 21:07:50 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/28 23:03:43 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int			main(void)
 {
 	char	*line;
-	t_token *command;
 
 	if (signal(SIGINT, sigint_catch) == SIG_ERR)
 		ft_putstr_fd("minishell: Cannot handle SIGINT...\n", 2);
@@ -27,10 +26,14 @@ Please define them with `setenv name [value]`\n", 2);
 		print_prompt();
 		line = get_the_file(0);
 		if (ft_strlen(line) == 0)
+		{
+			free(line);
 			break;
-		command = lexer(line);
-		exec_command(command->next);
-		release_tokens(command);
+		}
+		g_command = lexer(line);
+		free(line);
+		exec_command(g_command->next);
+		release_tokens(g_command);
 	}
 	return (1);
 }

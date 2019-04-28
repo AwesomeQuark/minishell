@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 21:26:51 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/28 15:14:39 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/28 22:50:05 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void			execute(t_token *command, char *exe_path)
 	else if (pid == 0)
 	{
 		if (execve(exe_path, argv, environ) == -1)
-			ft_printf("%m\n");
+			ft_printf("%s: error\n");
 		exit(1);
 	}
 	wait(&status);
@@ -47,8 +47,9 @@ static void			execute(t_token *command, char *exe_path)
 
 static int			search_exe_in_dir(t_token *command, char *dir_name, char *exe_name)
 {
-	DIR *d;
-	struct dirent *dir;
+	DIR				*d;
+	struct dirent	*dir;
+	char			*tmp;
 
 	d = opendir(dir_name);
 	if (!d)
@@ -57,10 +58,13 @@ static int			search_exe_in_dir(t_token *command, char *dir_name, char *exe_name)
 	{
 		if (ft_strcmp(dir->d_name, exe_name) == 0)
 		{
-			execute(command, concat(dir_name, "/", exe_name));
+			execute(command, (tmp = concat(dir_name, "/", exe_name)));
+			free(tmp);
+			closedir(d);
 			return (1);
 		}
 	}
+	free(dir);
 	closedir(d);
 	return (0);
 }
@@ -83,12 +87,12 @@ static int			search_exe(t_token *command)
 	{
 		if (search_exe_in_dir(command, paths[i], command->content))
 		{
-			free(paths);
+			free_tab(paths);
 			return (1);
 		}
 		i++;
 	}
-	free(paths);
+	free_tab(paths);
 	return (0);
 }
 
@@ -101,12 +105,7 @@ int					exec_command(t_token *command)
 	found = 0;
 	if (!command)
 		return (1);
-	if (command->type == STRING)
-	{
-		if (search_exe(command))
-			found = 1;
-	}
-	else while (g_builtins[i].type != STOP)
+	while (g_builtins[i].type != STOP)
 	{
 		if (command->type == g_builtins[i].type)
 		{
@@ -114,6 +113,11 @@ int					exec_command(t_token *command)
 			found = 1;
 		}
 		i++;
+	}
+	if (!found && command->type == STRING)
+	{
+		if (search_exe(command))
+			found = 1;
 	}
 	if (!found)
 		unknown_command(command);

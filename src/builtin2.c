@@ -6,23 +6,11 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 22:35:52 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/28 21:40:34 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/28 23:01:00 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int		clear_handler(t_token *command)
-{
-	struct winsize	w;
-
-	command = (t_token *)command;
-	ioctl(0, TIOCGWINSZ, &w);
-	while (w.ws_row--)
-		ft_printf("\n");
-	ft_printf("\033[0;0H");
-	return (1);
-}
 
 int		setenv_handler(t_token *command)
 {
@@ -50,5 +38,47 @@ int		unsetenv_handler(t_token *command)
 		ft_printf("Usage : unsetenv var\n");
 	else
 		unsetenv(command->content);
+	return (1);
+}
+
+static char *cd_get_path(t_token *command)
+{
+	char	*path;
+
+	if (command && command->type != SEMILICON && command->next
+		&& command->next->type != SEMILICON)
+	{
+		ft_printf("cd: too many arguments\n");
+		return ((char *)1);
+	}
+	if (!command || command->type == SEMILICON)
+		path = ft_strdup(get_env("HOME="));
+	else if (command->content[0] == '/')
+		path = command->content;
+	else
+		path = concat(get_env("PWD="), "/", command->content);
+	return (path);
+}
+
+int		cd_handler(t_token *command)
+{
+	char	*path;
+	char	*tmp;
+
+	tmp = NULL;
+	if ((path = cd_get_path(command)) == (char *)1)
+		return (0);
+	if (path && access(path, F_OK) == 0)
+		chdir(path);
+	else if (command)
+		ft_printf("cd: no such file or directory: %s\n", command->content);
+	else
+		ft_printf("cd: NULL directory (try setenv $HOME)\n");
+	tmp = getcwd(NULL, 1024);
+	setenv("PWD", tmp, 1);
+	free(path);
+	free(tmp);
+	if (command && path == command->content)
+		command->content = NULL;
 	return (1);
 }

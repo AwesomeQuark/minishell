@@ -6,11 +6,11 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 15:28:10 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/28 17:59:16 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/28 23:10:02 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include "minishell.h"
 
 static t_token	*last_token(t_token *head)
 {
@@ -43,6 +43,8 @@ void			release_tokens(t_token *head)
 {
 	t_token *tmp;
 
+	if (!g_command)
+		return ;
 	while (head)
 	{
 		if (head->content)
@@ -51,4 +53,5 @@ void			release_tokens(t_token *head)
 		head = head->next;
 		free(tmp);
 	}
+	g_command = NULL;
 }
