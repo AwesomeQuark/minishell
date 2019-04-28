@@ -31,6 +31,7 @@ static void			execute(t_token *command, char *exe_path)
 	pid_t	pid;
 	int		status;
 
+	pid = 0;
 	argv = allocate_args(command);
 	if ((pid = fork()) == -1)
 		return ;
