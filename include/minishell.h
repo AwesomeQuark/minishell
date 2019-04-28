@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 15:28:18 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/28 22:25:05 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/29 00:16:03 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <sys/ioctl.h>
+#include <sys/syslimits.h>
 #include "lexer.h"
 
 extern char **environ;
@@ -52,6 +53,8 @@ int				clear_handler(t_token *command);
 **	UTILS
 */
 char			*get_env(char *var);
+char			**get_env_addr(char *var);
+void			set_env(char *var_name, char* new);
 t_token			*check_semilicon(t_token *command);
 char			**allocate_args(t_token *command);
 

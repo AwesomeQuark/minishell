@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/27 23:55:42 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/28 23:09:04 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/29 00:13:01 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ void		print_prompt(void)
 void		sigint_catch(int signo)
 {
 	signo = 0;
-	release_tokens(g_command);
 	ft_printf("\n%sClosing minishell..%s\n", RED, DEF);
+	release_tokens(g_command);
+	kill(0, SIGINT);
 	exit(1);
 }
