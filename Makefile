@@ -20,6 +20,7 @@ SRC_NAME =		main.c\
 				builtin.c\
 				builtin2.c\
 				utils.c\
+				utils2.c\
 				display.c\
 				replace_links.c
 
@@ -40,7 +41,7 @@ LIB_DIR =		./libft/
 LIB_HEADER =	./libft/includes/
 LIB =			${addprefix $(LIB_DIR), $(LIB_NAME)}
 
-FLAGS =			-Wall -Werror -Wextra -O0 -g3 -fsanitize=address
+FLAGS =			-Wall -Werror -Wextra -O0 -g3# -fsanitize=address
 CC =			clang
 
 #################################################################################

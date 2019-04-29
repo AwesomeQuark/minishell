@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 21:26:51 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/29 05:05:43 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/29 19:10:32 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ static int			search_exe(t_token *command)
 	size_t	i;
 
 	i = 0;
+	paths = NULL;
 	if (command->content[0] == '/' || command->content[0] == '.' || command->content[0] == '~')
 	{
 		execute(command, command->content);
@@ -92,7 +93,8 @@ static int			search_exe(t_token *command)
 		}
 		i++;
 	}
-	free_tab(paths);
+	if (paths)
+		free_tab(paths);
 	return (0);
 }
 

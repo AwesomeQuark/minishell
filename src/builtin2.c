@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 22:35:52 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/29 00:09:14 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/29 21:03:50 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 int		setenv_handler(t_token *command)
 {
-	char	*tmp;
-
 	if (!command || command->type == SEMILICON)
 	{
 		ft_printf("Usage : setenv var [value]\n");
@@ -27,9 +25,6 @@ int		setenv_handler(t_token *command)
 		ft_printf("setenv: too many arguments\n");
 		return (0);
 	}
-	tmp = command->content;
-	command->content = concat(command->content, "=", NULL);
-	free(tmp);
 	if (!command->next || command->next->type == SEMILICON)
 		set_env(command->content, NULL);
 	else
@@ -44,7 +39,7 @@ int		unsetenv_handler(t_token *command)
 		ft_printf("Usage : unsetenv var\n");
 		return (0);
 	}
-	unsetenv(command->content);
+	unset_env(command->content);
 	return (1);
 }
 
@@ -82,7 +77,7 @@ int		cd_handler(t_token *command)
 	else
 		ft_printf("cd: NULL directory (try setenv $HOME)\n");
 	tmp = getcwd(NULL, PATH_MAX);
-	setenv("PWD", tmp, 1);
+	set_env("PWD=", tmp);
 	free(path);
 	free(tmp);
 	if (command && path == command->content)
