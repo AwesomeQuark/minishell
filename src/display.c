@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/27 23:55:42 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/29 00:13:01 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/29 00:22:56 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ static void	printer_prompt(char *user, char *display)
 {
 	if (!get_env("PATH=") || get_env("PATH=")[0] == '\0')
 		ft_printf("\033[31m\033[1m /!\\ No PATH /!\\ ");
-	ft_printf("%s%s%s %s[%s] %s->%s ", BOLD, CYAN, user, BLUE,
-		display, CYAN, DEF);
+	ft_printf("%s%s%s %s[%s] %s->%s ", BOLD, CYAN, user, BLUE, display, CYAN,
+		DEF);
 }
 
 void		print_prompt(void)
@@ -35,7 +35,8 @@ void		print_prompt(void)
 	path = ft_strdup(get_env("PWD="));
 	home = get_env("HOME=");
 	user = get_env("USER=");
-	if (home && path && ft_strncmp(path, home, ft_strlen(home)) == 0)
+	if (home && path && home[0] && path[0]
+		&& ft_strncmp(path, home, ft_strlen(home)) == 0)
 	{
 		path[ft_strlen(home) - 1] = '~';
 		display = &path[ft_strlen(home) - 1];

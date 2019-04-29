@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 15:52:03 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/28 22:04:28 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/29 00:34:38 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static t_token_def	g_tokens[] =
 	{"setenv", 6, SETENV},
 	{"unsetenv", 8, UNSETENV},
 	{"exit", 4, EXIT},
-	{"clear", 4, CLEAR},
+//	{"clear", 4, CLEAR},
 	{NULL, 0, STOP}
 };
 

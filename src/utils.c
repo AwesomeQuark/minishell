@@ -6,11 +6,16 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 22:16:46 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/29 00:16:25 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/29 05:04:27 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	unset_env(char *var_name)
+{
+	var_name = 0;
+}
 
 void	set_env(char *var_name, char* new)
 {
@@ -18,9 +23,8 @@ void	set_env(char *var_name, char* new)
 
 	if (!var_name)
 		return ;
-	var = get_env_addr(var_name);
-//	if (var)
-//		free(var);
+	if (!(var = get_env_addr(var_name)))
+		return ;
 	*var = concat(var_name, new, NULL);
 }
 
