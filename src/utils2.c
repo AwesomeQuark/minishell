@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 18:51:24 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/29 21:01:50 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/29 21:55:36 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char**			realloc_tab_remove_index(char **tab, size_t index)
 	size = tab_size(tab);
 	if (!(ret = malloc(sizeof(char *) * size)))
 		return (0);
-	ret[size - 1] = NULL;
+	ft_bzero(ret, size + 1);
 	size = 0;
 	while (ret[size])
 	{

@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/27 23:55:42 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/29 05:46:34 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/29 22:04:06 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,14 @@ static void	printer_prompt(char *user, char *display)
 {
 	if (!get_env("PATH=") || get_env("PATH=")[0] == '\0')
 		ft_printf("\033[31m\033[1m /!\\ No PATH /!\\ ");
-	ft_printf("%s%s%s %s[%s] %s->%s ", BOLD, CYAN, user, BLUE, display, CYAN,
-		DEF);
+	if (user)
+		ft_printf("%s%s%s", BOLD, CYAN, user);
+	else
+		ft_printf("%s%sminishell", BOLD, CYAN);
+	if (display)
+		ft_printf("%s[%s] %s->%s ", BLUE, display, CYAN, DEF);
+	else
+		ft_printf("%s[?] %s->%s ", BLUE, CYAN, DEF);
 }
 
 void		print_prompt(void)
@@ -43,10 +49,6 @@ void		print_prompt(void)
 	}
 	else
 		display = path;
-	if (user == NULL || user[0] == '\0')
-		user = ft_strdup("minishell");
-	if (display == NULL || display[0] == '\0')
-		display = ft_strdup("?");
 	printer_prompt(user, display);
 	free(path);
 }
