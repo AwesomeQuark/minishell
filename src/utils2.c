@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 18:51:24 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/29 21:55:36 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/29 22:31:44 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static size_t	tab_size(char **tab)
 	return (i);
 }
 
-char**			realloc_tab_remove_index(char **tab, size_t index)
+char			**realloc_tab_remove_index(char **tab, size_t index)
 {
 	char	**ret;
 	size_t	size;
@@ -46,7 +46,7 @@ char**			realloc_tab_remove_index(char **tab, size_t index)
 	return (ret);
 }
 
-char	**realloc_tab_add_var(char **tab, char *new)
+char			**realloc_tab_add_var(char **tab, char *new)
 {
 	char	**ret;
 	size_t	size;
@@ -66,7 +66,7 @@ char	**realloc_tab_add_var(char **tab, char *new)
 	return (ret);
 }
 
-char	**copy_tab(char **tab)
+char			**copy_tab(char **tab)
 {
 	char	**ret;
 	size_t	size;
@@ -82,4 +82,30 @@ char	**copy_tab(char **tab)
 		size++;
 	}
 	return (ret);
+}
+
+char			**allocate_args(t_token *command)
+{
+	char	**argv;
+	t_token	*ptr;
+	size_t	i;
+
+	i = 0;
+	ptr = command;
+	while (command && command->type != SEMILICON)
+	{
+		i++;
+		command = command->next;
+	}
+	argv = malloc(sizeof(char *) * (i + 1));
+	argv[i] = NULL;
+	command = ptr;
+	i = 0;
+	while (command && command->type != SEMILICON)
+	{
+		argv[i] = command->content;
+		command = command->next;
+		i++;
+	}
+	return (argv);
 }

@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/28 17:59:02 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/28 22:52:48 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/29 22:23:42 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ static void		replace_tilde(t_token *current, size_t *i)
 	}
 }
 
-
 static void		replace_dollar(t_token *current, size_t *i)
 {
 	char	*new;
@@ -38,14 +37,16 @@ static void		replace_dollar(t_token *current, size_t *i)
 	{
 		current->content[*i] = '\0';
 		*i += 1;
-		while (current->content[*i + var_size] && current->content[*i + var_size] != '$')
+		while (current->content[*i + var_size]
+			&& current->content[*i + var_size] != '$')
 			var_size++;
 		if (!(var = malloc(sizeof(char) * (var_size + 2))))
 			return ;
 		ft_strncpy(var, &current->content[*i], var_size);
 		var[var_size] = '=';
 		var[var_size + 1] = '\0';
-		new = concat(current->content, get_env(var), &current->content[*i + var_size]);
+		new = concat(current->content, get_env(var),
+			&current->content[*i + var_size]);
 		free(current->content);
 		free(var);
 		current->content = new;

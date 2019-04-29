@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 21:38:28 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/29 22:04:32 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/30 00:03:15 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int		pwd_handler(t_token *command)
 	}
 	path = getcwd(NULL, 1024);
 	ft_printf("%s\n", path);
-	set_env("PWD=", path);
+	set_env("PWD", path);
 	free(path);
 	return (1);
 }

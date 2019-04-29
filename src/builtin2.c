@@ -6,13 +6,13 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 22:35:52 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/29 21:03:50 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/30 00:02:56 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		setenv_handler(t_token *command)
+int			setenv_handler(t_token *command)
 {
 	if (!command || command->type == SEMILICON)
 	{
@@ -32,7 +32,7 @@ int		setenv_handler(t_token *command)
 	return (1);
 }
 
-int		unsetenv_handler(t_token *command)
+int			unsetenv_handler(t_token *command)
 {
 	if (!command || command->type == SEMILICON)
 	{
@@ -43,7 +43,7 @@ int		unsetenv_handler(t_token *command)
 	return (1);
 }
 
-static char *cd_get_path(t_token *command)
+static char	*cd_get_path(t_token *command)
 {
 	char	*path;
 
@@ -62,7 +62,7 @@ static char *cd_get_path(t_token *command)
 	return (path);
 }
 
-int		cd_handler(t_token *command)
+int			cd_handler(t_token *command)
 {
 	char	*path;
 	char	*tmp;
@@ -77,7 +77,7 @@ int		cd_handler(t_token *command)
 	else
 		ft_printf("cd: NULL directory (try setenv $HOME)\n");
 	tmp = getcwd(NULL, PATH_MAX);
-	set_env("PWD=", tmp);
+	set_env("PWD", tmp);
 	free(path);
 	free(tmp);
 	if (command && path == command->content)

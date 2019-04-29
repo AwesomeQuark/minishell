@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 15:52:03 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/29 00:34:38 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/29 23:56:44 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,31 +22,40 @@ static t_token_def	g_tokens[] =
 	{"setenv", 6, SETENV},
 	{"unsetenv", 8, UNSETENV},
 	{"exit", 4, EXIT},
-//	{"clear", 4, CLEAR},
+	{"clear", 4, CLEAR},
 	{NULL, 0, STOP}
 };
 
-static int			handle_escape(char **file, char **last_token_found)
+static void			skip_until_char(char **file, char **last_token, char c)
+{
+	*last_token += 1;
+	*file += 1;
+	while (**file != '\0' && **file != c)
+		*file += 1;
+}
+
+static int			handle_escape(t_token *head, char **file,
+	char **last_token)
 {
 	if (**file == ' ' || **file == '\t' || **file == '\n')
+	{
+		if (*last_token != *file)
+			add_token(*last_token, *file - *last_token, STRING, head);
+		*file += 1;
+		*last_token = *file;
 		return (1);
+	}
 	if (**file == '"')
-	{
-		*last_token_found += 1;
-		*file += 1;
-		while (**file != '\0' && **file != '"')
-			*file += 1;
-		return (2);
-	}
-	if (**file == '\'')
-	{
-		*last_token_found += 1;
-		*file += 1;
-		while (**file != '\0' && **file != '\'')
-			*file += 1;
-		return (2);
-	}
-	return (0);
+		skip_until_char(file, last_token, '\"');
+	else if (**file == '\'')
+		skip_until_char(file, last_token, '\'');
+	else
+		return (0);
+	if (*last_token != *file)
+		add_token(*last_token, *file - *last_token, STRING_RAW, head);
+	*file += 1;
+	*last_token = *file;
+	return (1);
 }
 
 static t_token_def	*search_token_type(char *file)
@@ -67,29 +76,18 @@ int					lexer_main_loop(char *file, t_token *head)
 {
 	t_token_def	*current;
 	char		*last_token_found;
-	int			ret;
 
 	last_token_found = file;
 	while (file && *file)
 	{
-		if ((ret = handle_escape(&file, &last_token_found)))
-		{
-			if (last_token_found != file && ret == 1)
-				add_token(last_token_found, file - last_token_found, STRING,
-					head);
-			else if (last_token_found != file && ret == 2)
-				add_token(last_token_found, file - last_token_found, STRING_RAW,
-					head);
-			file++;
-			last_token_found = file;
+		if (handle_escape(head, &file, &last_token_found))
 			continue ;
-		}
 		if (!(current = search_token_type(file)))
 		{
 			file++;
 			continue ;
 		}
-		if (last_token_found != file && head->next != NULL)
+		if (last_token_found != file)
 			add_token(last_token_found, file - last_token_found, STRING, head);
 		file += current->size;
 		last_token_found = file;

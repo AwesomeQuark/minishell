@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 22:16:46 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/29 21:06:27 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/30 00:02:45 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	unset_env(char *var_name)
 	return ;
 }
 
-void	set_env(char *var_name, char* new)
+void	set_env(char *var_name, char *new)
 {
 	char	**var;
 	char	*tmp;
@@ -32,7 +32,7 @@ void	set_env(char *var_name, char* new)
 	if ((var = get_env_addr(var_name)))
 	{
 		tmp = *var;
-		*var = concat(var_name, new, NULL);
+		*var = concat(var_name, "=", new);
 		free(tmp);
 	}
 	else
@@ -46,7 +46,8 @@ char	**get_env_addr(char *var)
 	i = 0;
 	while (environ && environ[i])
 	{
-		if (ft_strncmp(environ[i], var, ft_strlen(var)) == 0 && environ[i][ft_strlen(var)] == '=')
+		if (ft_strncmp(environ[i], var, ft_strlen(var)) == 0
+			&& environ[i][ft_strlen(var)] == '=')
 			return (environ + i);
 		i++;
 	}
@@ -71,36 +72,10 @@ t_token	*check_semilicon(t_token *command)
 {
 	while (command)
 	{
-		if (command->type == SEMILICON && command->next != NULL && command->next->type != SEMILICON)
+		if (command->type == SEMILICON && command->next != NULL
+			&& command->next->type != SEMILICON)
 			return (command->next);
 		command = command->next;
 	}
 	return (NULL);
 }
-
-char	**allocate_args(t_token *command)
-{
-	char	**argv;
-	t_token	*ptr;
-	size_t	i;
-
-	i = 0;
-	ptr = command;
-	while (command && command->type != SEMILICON)
-	{
-		i++;
-		command = command->next;
-	}
-	argv = malloc(sizeof(char *) * (i + 1));
-	argv[i] = NULL;
-	command = ptr;
-	i = 0;
-	while (command && command->type != SEMILICON)
-	{
-		argv[i] = command->content;
-		command = command->next;
-		i++;
-	}
-	return (argv);
-}
-

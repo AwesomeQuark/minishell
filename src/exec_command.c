@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 21:26:51 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/29 19:10:32 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/29 22:27:24 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,20 @@ static void			execute(t_token *command, char *exe_path)
 	pid = 0;
 	argv = allocate_args(command);
 	if ((pid = fork()) == -1)
-		return ; 
+		return ;
 	else if (pid == 0)
 	{
 		if (execve(exe_path, argv, environ) == -1)
-			ft_printf("%s: inexistant directory or insuffisent rights\n", exe_path);
+			ft_printf("%s: inexistant directory or insuffisent rights\n",
+				exe_path);
 		exit(1);
 	}
 	wait(&status);
 	free(argv);
 }
 
-static int			search_exe_in_dir(t_token *command, char *dir_name, char *exe_name)
+static int			search_exe_in_dir(t_token *command, char *dir_name,
+	char *exe_name)
 {
 	DIR				*d;
 	struct dirent	*dir;
@@ -76,8 +78,8 @@ static int			search_exe(t_token *command)
 	size_t	i;
 
 	i = 0;
-	paths = NULL;
-	if (command->content[0] == '/' || command->content[0] == '.' || command->content[0] == '~')
+	if (command->content[0] == '/' || command->content[0] == '.'
+		|| command->content[0] == '~')
 	{
 		execute(command, command->content);
 		return (1);
@@ -103,18 +105,17 @@ int					exec_command(t_token *command)
 	int		i;
 	int		found;
 
-	i = 0;
+	i = -1;
 	found = 0;
 	if (!command)
 		return (1);
-	while (g_builtins[i].type != STOP)
+	while (g_builtins[++i].type != STOP)
 	{
 		if (command->type == g_builtins[i].type)
 		{
 			g_builtins[i].function(command->next);
 			found = 1;
 		}
-		i++;
 	}
 	if (!found && command->type == STRING)
 	{
