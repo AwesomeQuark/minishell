@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 21:26:51 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/30 13:49:41 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/30 17:28:01 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ static t_builtin	g_builtins[] =
 static void			execute(t_token *command, char *exe_path)
 {
 	char	**argv;
-	pid_t	pid;
 	int		status;
 
 	pid = 0;
