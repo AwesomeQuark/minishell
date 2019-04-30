@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 18:51:24 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/29 22:31:44 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/30 14:17:30 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,20 +27,21 @@ char			**realloc_tab_remove_index(char **tab, size_t index)
 	char	**ret;
 	size_t	size;
 	size_t	i;
+	size_t	j;
 
-	i = 0;
 	size = tab_size(tab);
 	if (!(ret = malloc(sizeof(char *) * size)))
 		return (0);
-	ft_bzero(ret, size + 1);
-	size = 0;
-	while (ret[size])
+	ret[size - 1] = NULL;
+	i = 0;
+	j = 0;
+	while (ret && i < size - 1)
 	{
-		if (size == index)
-			i++;
-		ret[size] = ft_strdup(tab[i]);
-		size++;
+		if (i == index)
+			j++;
+		ret[i] = ft_strdup(tab[j]);
 		i++;
+		j++;
 	}
 	free_tab(tab);
 	return (ret);
@@ -50,18 +51,19 @@ char			**realloc_tab_add_var(char **tab, char *new)
 {
 	char	**ret;
 	size_t	size;
+	size_t	i;
 
 	size = tab_size(tab);
 	if (!(ret = malloc(sizeof(char *) * (size + 2))))
 		return (NULL);
 	ret[size + 1] = NULL;
-	size = 0;
-	while (tab[size])
+	i = 0;
+	while (tab && i < size)
 	{
-		ret[size] = ft_strdup(tab[size]);
-		size++;
+		ret[i] = ft_strdup(tab[i]);
+		i++;
 	}
-	ret[size] = new;
+	ret[i] = new;
 	free_tab(tab);
 	return (ret);
 }
@@ -70,16 +72,17 @@ char			**copy_tab(char **tab)
 {
 	char	**ret;
 	size_t	size;
+	size_t	i;
 
 	size = tab_size(tab);
 	if (!(ret = malloc(sizeof(char *) * (size + 1))))
 		return (NULL);
 	ret[size] = NULL;
-	size = 0;
-	while (tab[size])
+	i = 0;
+	while (tab && i < size)
 	{
-		ret[size] = ft_strdup(tab[size]);
-		size++;
+		ret[i] = ft_strdup(tab[i]);
+		i++;
 	}
 	return (ret);
 }

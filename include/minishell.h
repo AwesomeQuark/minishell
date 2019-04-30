@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 15:28:18 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/30 13:04:31 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/30 13:49:38 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void			set_env(char *var_name, char *new);
 void			unset_env(char *var_name);
 t_token			*check_semilicon(t_token *command);
 char			**allocate_args(t_token *command);
-char**			realloc_tab_remove_index(char **tab, size_t index);
+char			**realloc_tab_remove_index(char **tab, size_t index);
 char			**realloc_tab_add_var(char **tab, char *new);
 char			**copy_tab(char **tab);
 
