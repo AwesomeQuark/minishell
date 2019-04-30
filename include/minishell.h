@@ -6,31 +6,29 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 15:28:18 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/29 20:55:54 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/30 13:04:31 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-#include <signal.h>
-#include <dirent.h>
-#include <sys/types.h>
-#include <sys/wait.h>
-#include <sys/ioctl.h>
-#include <sys/syslimits.h>
-#include "lexer.h"
+# include <signal.h>
+# include <dirent.h>
+# include <sys/types.h>
+# include <sys/wait.h>
+# include <sys/ioctl.h>
+# include <sys/syslimits.h>
+# include "lexer.h"
 
-extern char **environ;
-t_token *g_command;
-
+extern char		**environ;
+t_token			*g_command;
 
 typedef struct	s_builtin
 {
 	t_token_type	type;
-	int (*function)(t_token *);
+	int				(*function)(t_token *);
 }				t_builtin;
-
 
 /*
 **	EXEC_COMMAND
@@ -54,7 +52,7 @@ int				clear_handler(t_token *command);
 */
 char			*get_env(char *var);
 char			**get_env_addr(char *var);
-void			set_env(char *var_name, char* new);
+void			set_env(char *var_name, char *new);
 void			unset_env(char *var_name);
 t_token			*check_semilicon(t_token *command);
 char			**allocate_args(t_token *command);

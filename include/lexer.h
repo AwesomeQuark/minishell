@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 17:14:29 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/28 20:21:29 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/30 13:04:02 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 
 typedef enum
 {
-	START,			// HEAD TAG
-	SEMILICON,		// EOL
-	PWD,			// ### BUILTINS ###
+	START,
+	SEMILICON,
+	PWD,
 	CD,
 	ECHO,
 	ENV,
@@ -27,19 +27,19 @@ typedef enum
 	UNSETENV,
 	EXIT,
 	CLEAR,
-	STRING, 		//MISC
+	STRING,
 	STRING_RAW,
-	STOP			// End of the array
-} t_token_type;
+	STOP
+}	t_token_type;
 
-typedef struct s_token_def
+typedef struct	s_token_def
 {
 	char*			content;
 	size_t			size;
 	t_token_type	type;
 }				t_token_def;
 
-typedef struct s_token
+typedef struct	s_token
 {
 	struct s_token	*next;
 	char*			content;
@@ -49,7 +49,8 @@ typedef struct s_token
 
 t_token			*lexer(char *line);
 void			release_tokens(t_token *head);
-int				add_token(char *content, size_t size, t_token_type type, t_token *head);
+int				add_token(char *content, size_t size, t_token_type type,
+	t_token *head);
 void			replace_links(t_token *head);
 
 #endif
