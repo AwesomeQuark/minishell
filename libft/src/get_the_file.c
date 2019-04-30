@@ -6,11 +6,11 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 09:42:25 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/30 17:53:31 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/30 19:44:25 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"./
+#include "libft.h"
 
 char		*get_the_file(int fd)
 {

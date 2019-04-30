@@ -1,2 +1,0 @@
-ctrl-c avant executon premier binaire demonte le shell
-cd -

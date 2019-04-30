@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 22:35:52 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/30 18:14:35 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/30 19:41:18 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,10 @@ static char	*cd_get_path(t_token *command)
 	else if (command->content[0] == '/')
 		path = command->content;
 	else if (ft_strcmp(command->content, "-") == 0)
+	{
 		path = ft_strdup(get_env("OLDPWD="));
+		ft_printf("%s\n", path);
+	}
 	else
 		path = concat(get_env("PWD="), "/", command->content);
 	return (path);
