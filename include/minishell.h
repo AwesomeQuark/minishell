@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 15:28:18 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/30 17:28:09 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/30 17:47:12 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 
 extern char		**environ;
 t_token			*g_command;
-pid_t			pid;
+pid_t			g_pid;
 
 typedef struct	s_builtin
 {

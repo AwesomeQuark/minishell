@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/27 23:55:42 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/30 17:33:41 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/30 17:47:43 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,9 @@ void		print_prompt(void)
 void		sigint_catch(int signo)
 {
 	ft_putstr_fd("\n", 1);
-	if (kill(pid, signo) == -1)
+	if (kill(g_pid, signo) == -1)
+	{
+		//release_tokens(g_command);
 		print_prompt();
+	}
 }

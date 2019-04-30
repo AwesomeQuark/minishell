@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 22:35:52 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/30 00:02:56 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/30 18:14:35 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ static char	*cd_get_path(t_token *command)
 		path = ft_strdup(get_env("HOME="));
 	else if (command->content[0] == '/')
 		path = command->content;
+	else if (ft_strcmp(command->content, "-") == 0)
+		path = ft_strdup(get_env("OLDPWD="));
 	else
 		path = concat(get_env("PWD="), "/", command->content);
 	return (path);
@@ -64,8 +66,8 @@ static char	*cd_get_path(t_token *command)
 
 int			cd_handler(t_token *command)
 {
-	char	*path;
-	char	*tmp;
+	char		*path;
+	char		*tmp;
 
 	tmp = NULL;
 	if ((path = cd_get_path(command)) == (char *)1)
@@ -77,6 +79,7 @@ int			cd_handler(t_token *command)
 	else
 		ft_printf("cd: NULL directory (try setenv $HOME)\n");
 	tmp = getcwd(NULL, PATH_MAX);
+	set_env("OLDPWD", get_env("PWD="));
 	set_env("PWD", tmp);
 	free(path);
 	free(tmp);

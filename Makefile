@@ -41,7 +41,7 @@ LIB_DIR =		./libft/
 LIB_HEADER =	./libft/includes/
 LIB =			${addprefix $(LIB_DIR), $(LIB_NAME)}
 
-FLAGS =			-Wall -Werror -Wextra -O0 -g3 -fsanitize=address
+FLAGS =			-Wall -Werror -Wextra -O0 -g3 #-fsanitize=address
 CC =			clang
 
 #################################################################################
@@ -55,7 +55,7 @@ CC =			clang
 ########## GENERALS ##########
 ##############################
 
-all: $(LIB) $(OBJ_DIR) $(NAME) $(HEADER)
+all: ./auteur $(LIB) $(OBJ_DIR) $(NAME) $(HEADER)
 
 re: fclean all
 
@@ -72,7 +72,7 @@ fclean:
 ######### COMPILATION #########
 ###############################
 
-$(NAME): ./auteur $(OBJ_DIR) $(OBJ) $(HEADER)
+$(NAME): $(OBJ)
 	$(CC) $(FLAGS) $(OBJ) $(LIB) -o $(NAME) -I$(HEADER_DIR) -I$(LIB_DIR)
 	echo "\n \033[1m\033[4m\033[35m\\^/ Done compiling \\^/\033[0m [$(NAME)] --> $(LIB_NAME)"
 	clear
@@ -83,7 +83,7 @@ $(NAME): ./auteur $(OBJ_DIR) $(OBJ) $(HEADER)
 	echo "##\033[32m |__|__|__| |__| |__|\__| |__| |____/ |__|_|__| |____/ |____| |____| \033[0m##"
 	echo "##\033[32m |__|  |__| |__| |__|\__| |__| |____/ |__| |__| |____/ |____| |____| \033[0m##"
 	echo "##                                                                     ##"
-	echo "#################################\033[32m CONOEL \033[0m################################"
+	echo "################################\033[32m CONOEL \033[0m#################################"
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c $(HEADER)
 	$(CC) $(FLAGS) -c $< -o $@ -I$(HEADER_DIR) -I$(LIB_HEADER)

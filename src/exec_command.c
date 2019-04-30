@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 21:26:51 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/30 17:28:01 by conoel           ###   ########.fr       */
+/*   Updated: 2019/04/30 18:48:56 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ static void			execute(t_token *command, char *exe_path)
 	char	**argv;
 	int		status;
 
-	pid = 0;
+	g_pid = 0;
 	argv = allocate_args(command);
-	if ((pid = fork()) == -1)
+	if ((g_pid = fork()) == -1)
 		return ;
-	else if (pid == 0)
+	if (g_pid == 0)
 	{
 		if (execve(exe_path, argv, environ) == -1)
 			ft_printf("%s: inexistant directory or insuffisent rights\n",
@@ -121,7 +121,7 @@ int					exec_command(t_token *command)
 		if (search_exe(command))
 			found = 1;
 	}
-	if (!found)
+	if (!found && command->type != SEMILICON)
 		unknown_command(command);
 	if (check_semilicon(command))
 		return (exec_command(check_semilicon(command)));
