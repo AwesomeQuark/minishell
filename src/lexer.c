@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 15:52:03 by conoel            #+#    #+#             */
-/*   Updated: 2019/05/01 16:32:09 by conoel           ###   ########.fr       */
+/*   Updated: 2019/05/02 09:45:41 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ static int			handle_escape(t_token *head, char **file,
 	return (1);
 }
 
-static t_token_def	*search_token_type(char **file, char **last_token, t_token *head)
+static t_token_def	*search_token_type(char **file, char **last_token,
+	t_token *head)
 {
 	size_t	i;
 
@@ -65,8 +66,10 @@ static t_token_def	*search_token_type(char **file, char **last_token, t_token *h
 	while (g_tokens[i].type != STOP)
 	{
 		if (ft_strncmp(*file, g_tokens[i].content, g_tokens[i].size) == 0
-			&& ((*file)[g_tokens[i].size] == ' ' || (*file)[g_tokens[i].size] == '\n'
-			|| (*file)[g_tokens[i].size] == ';') && *last_token == *file)
+			&& ((*file)[g_tokens[i].size] == ' '
+			|| (*file)[g_tokens[i].size] == '\n'
+			|| (*file)[g_tokens[i].size] == ';')
+			&& *last_token == *file)
 			return (&g_tokens[i]);
 		i++;
 	}
@@ -104,7 +107,8 @@ int					lexer_main_loop(char *file, t_token *head)
 		if (!(add_token(current->content, current->size, current->type, head)))
 			return (0);
 	}
-	if (last_token_found != file && !(file - last_token_found == 1 && *last_token_found == '\n'))
+	if (last_token_found != file && !(file - last_token_found == 1
+		&& *last_token_found == '\n'))
 		add_token(last_token_found, file - last_token_found, STRING, head);
 	return (1);
 }
