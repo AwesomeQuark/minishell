@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 17:14:29 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/30 17:49:09 by conoel           ###   ########.fr       */
+/*   Updated: 2019/05/01 16:31:43 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ typedef enum		e_list
 	SETENV,
 	UNSETENV,
 	EXIT,
-	CLEAR,
 	STRING,
 	STRING_RAW,
 	STOP

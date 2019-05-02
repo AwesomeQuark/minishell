@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 21:26:51 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/30 19:43:52 by conoel           ###   ########.fr       */
+/*   Updated: 2019/05/01 16:31:39 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ static t_builtin	g_builtins[] =
 	{SETENV, &setenv_handler},
 	{UNSETENV, &unsetenv_handler},
 	{EXIT, &exit_handler},
-	{CLEAR, &clear_handler},
 	{STOP, NULL}
 };
 

@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 15:28:05 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/30 19:24:46 by conoel           ###   ########.fr       */
+/*   Updated: 2019/05/02 09:42:54 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void		init(void)
 {
-	g_pid = 0;
+	g_pid = 1;
 	environ = copy_tab(environ);
 	if (signal(SIGINT, sigint_catch) == SIG_ERR)
 		ft_putstr_fd("minishell: Cannot handle SIGINT...\n", 2);

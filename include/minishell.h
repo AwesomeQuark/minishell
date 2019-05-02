@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 15:28:18 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/30 17:47:12 by conoel           ###   ########.fr       */
+/*   Updated: 2019/05/01 16:31:59 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include <dirent.h>
 # include <sys/types.h>
 # include <sys/wait.h>
-# include <sys/ioctl.h>
 # include <sys/syslimits.h>
 # include "lexer.h"
 

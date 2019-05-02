@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 21:38:28 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/30 13:49:41 by conoel           ###   ########.fr       */
+/*   Updated: 2019/05/01 16:31:53 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int		exit_handler(t_token *command)
 	command = NULL;
 	free_tab(environ);
 	release_tokens(g_command);
-	exit(1);
+	exit(0);
 }
 
 int		env_handler(t_token *command)
@@ -59,17 +59,5 @@ int		pwd_handler(t_token *command)
 	ft_printf("%s\n", path);
 	set_env("PWD", path);
 	free(path);
-	return (1);
-}
-
-int		clear_handler(t_token *command)
-{
-	struct winsize	w;
-
-	command = (t_token *)command;
-	ioctl(0, TIOCGWINSZ, &w);
-	while (w.ws_row--)
-		ft_printf("\n");
-	ft_printf("\033[0;0H");
 	return (1);
 }
