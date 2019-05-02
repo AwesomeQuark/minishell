@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/27 23:55:42 by conoel            #+#    #+#             */
-/*   Updated: 2019/05/02 09:41:44 by conoel           ###   ########.fr       */
+/*   Updated: 2019/05/02 15:56:55 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,15 @@ void		sigint_catch(int signo)
 	write(1, "\n", 1);
 	if (kill(g_pid, signo) == -1)
 		print_prompt();
+}
+
+void		quit(void)
+{
+	char *error;
+
+	error = "\033[31minishell: Error\033[0m\n";
+	write(2, error, ft_strlen(error));
+	release_tokens(g_command);
+	kill(g_pid, SIGINT);
+	exit(1);
 }

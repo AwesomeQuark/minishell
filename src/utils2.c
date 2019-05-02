@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 18:51:24 by conoel            #+#    #+#             */
-/*   Updated: 2019/04/30 14:17:30 by conoel           ###   ########.fr       */
+/*   Updated: 2019/05/02 15:54:39 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char			**realloc_tab_remove_index(char **tab, size_t index)
 
 	size = tab_size(tab);
 	if (!(ret = malloc(sizeof(char *) * size)))
-		return (0);
+		quit();
 	ret[size - 1] = NULL;
 	i = 0;
 	j = 0;
@@ -39,7 +39,8 @@ char			**realloc_tab_remove_index(char **tab, size_t index)
 	{
 		if (i == index)
 			j++;
-		ret[i] = ft_strdup(tab[j]);
+		if (!(ret[i] = ft_strdup(tab[j])))
+			quit();
 		i++;
 		j++;
 	}
@@ -55,12 +56,13 @@ char			**realloc_tab_add_var(char **tab, char *new)
 
 	size = tab_size(tab);
 	if (!(ret = malloc(sizeof(char *) * (size + 2))))
-		return (NULL);
+		quit();
 	ret[size + 1] = NULL;
 	i = 0;
 	while (tab && i < size)
 	{
-		ret[i] = ft_strdup(tab[i]);
+		if (!(ret[i] = ft_strdup(tab[i])))
+			quit();
 		i++;
 	}
 	ret[i] = new;
@@ -76,7 +78,7 @@ char			**copy_tab(char **tab)
 
 	size = tab_size(tab);
 	if (!(ret = malloc(sizeof(char *) * (size + 1))))
-		return (NULL);
+		quit();
 	ret[size] = NULL;
 	i = 0;
 	while (tab && i < size)
@@ -100,7 +102,8 @@ char			**allocate_args(t_token *command)
 		i++;
 		command = command->next;
 	}
-	argv = malloc(sizeof(char *) * (i + 1));
+	if (!(argv = malloc(sizeof(char *) * (i + 1))))
+		quit();
 	argv[i] = NULL;
 	command = ptr;
 	i = 0;

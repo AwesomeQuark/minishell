@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 21:26:51 by conoel            #+#    #+#             */
-/*   Updated: 2019/05/01 16:31:39 by conoel           ###   ########.fr       */
+/*   Updated: 2019/05/02 16:04:00 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,18 @@ static void			execute(t_token *command, char *exe_path)
 		return ;
 	if (g_pid == 0)
 	{
+		if (access(exe_path, F_OK) == -1)
+		{
+			ft_printf("%s: inexistant directory\n", exe_path);
+			exit(1);
+		}
+		if (access(exe_path, X_OK) == -1)
+		{
+			ft_printf("%s: insufficient rights\n", exe_path);
+			exit(1);
+		}
 		if (execve(exe_path, argv, environ) == -1)
-			ft_printf("%s: inexistant directory or insufficient rights\n",
-				exe_path);
+			ft_printf("%s: cannot execute\n", exe_path);
 		exit(1);
 	}
 	wait(&status);

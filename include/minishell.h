@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 15:28:18 by conoel            #+#    #+#             */
-/*   Updated: 2019/05/01 16:31:59 by conoel           ###   ########.fr       */
+/*   Updated: 2019/05/02 15:54:57 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,6 @@ char			**copy_tab(char **tab);
 void			unknown_command(t_token *command);
 void			print_prompt(void);
 void			sigint_catch(int signo);
+void			quit(void);
 
 #endif
