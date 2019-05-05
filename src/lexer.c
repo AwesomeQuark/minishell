@@ -6,7 +6,7 @@
 /*   By: conoel <conoel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 15:52:03 by conoel            #+#    #+#             */
-/*   Updated: 2019/05/02 09:45:41 by conoel           ###   ########.fr       */
+/*   Updated: 2019/05/05 16:59:09 by conoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,12 @@ static void			skip_until_char(char **file, char **last_token, char c)
 static int			handle_escape(t_token *head, char **file,
 	char **last_token)
 {
-	if (**file == ' ' || **file == '\t' || **file == '\n')
+	if (**file == ' ' || **file == '\t' || **file == '\n' || **file == ';')
 	{
 		if (*last_token != *file)
 			add_token(*last_token, *file - *last_token, STRING, head);
+		if (**file == ';')
+			add_token(";", 1, SEMILICON, head);
 		*file += 1;
 		*last_token = *file;
 		return (1);
